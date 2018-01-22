@@ -1,0 +1,47 @@
+group 'com.danielvargas'
+version '1.0-SNAPSHOT'
+
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+//apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'ArduinoSerialGetter'
+    version =  '0.1.0'
+}
+
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework:spring-web")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile 'org.json:json:20171018'
+    compile "org.apache.httpcomponents:httpclient:4.3.3"
+
+    compile files('libs/RXTXcomm.jar')
+
+
+    testCompile("junit:junit")
+}
