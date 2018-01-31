@@ -31,6 +31,8 @@ public class SerialReader implements SerialPortEventListener {
     private PostRequest postReq = new PostRequest();
     private PutRequest putReq = new PutRequest();
     private String[] data;
+    //    private String url = "https://aqueous-temple-46001.herokuapp.com/";
+    private String url = "http://localhost:8090/";
 
     private Boolean primera = true;
     private boolean switcher = true;
@@ -126,20 +128,52 @@ public class SerialReader implements SerialPortEventListener {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String line = input.readLine();
-//               TODO: Anexar una 'a' y 'b' (u otra señal) al codigo para reconocimiento
-                if (line.charAt(0) == 'a') {
-//                    TODO: hacer get al servidor para comparar el codigo
-                    if (true) {
-//                    TODO: Si no hay conexion revisar copia interna
-                    }
-                } else if (line.charAt(0) == 'b') {
-//                    TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
-//                    TODO: Hacer post mandado el codigo a la API
-                } else {
-                    data = line.split("/");
+                String code;
+                DataEntity dataEntity;
+                String[] datos;
+                switch (line.charAt(0)) {
+//                    TODO: Anexar una 'a' y 'b' (u otra señal) al codigo arduino para reconocimiento
+                    case 'a':
+                        code = line.substring(1);
+                        datos = input.readLine().split("/");
+                        dataEntity = new DataEntity(
+                                Integer.parseInt(datos[0]),
+                                Integer.parseInt(datos[1])
+                                , Integer.parseInt(datos[2]),
+                                Integer.parseInt(datos[3]),
+                                code
+                        );
+                        postReq.postData(url, dataEntity);
+//                        TODO: refactorizar, evitar crear dataentity incesariamente
+                        postReq.postData(url + "stations/" + datos[0], new DataEntity());
+                        if (postReq.getResponseCode() != 201) {
+//                            TODO: agregar marca para saber que no llegó al servidor
+                        }
+//                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
+                        break;
+                    case 'b':
+                        code = line.substring(1);
+                        datos = input.readLine().split("/");
+                        try {
+//                            TODO: Revisar primero que sí se pudo subir al servidor previamente
+                            dataEntity = getReq.call_me(url + datos[0]);
+                            if (dataEntity.getRfid().equals(code)) {
+                                output.write(0);
+                                postReq.postData(url + "stations/" + datos[0], new DataEntity());
+                            } else {
+                                output.write(1);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        break;
+                    case 'd':
+                        data = line.split("/");
 //                    TODO: procesar los datos
+                        break;
+                    default:
+                        System.out.println("Se recibió esto: " + line);
                 }
-
             } catch (Exception e) {
                 System.err.println(e.toString());
             }

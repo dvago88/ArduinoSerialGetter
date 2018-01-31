@@ -5,22 +5,22 @@ import java.time.LocalDateTime;
 public class DataEntity {
 
     private Long id;
-    private int sensor1;
+    private int stationNumber;
     private int sensor2;
     private int sensor3;
     private int sensor4;
-    private String code;
+    private String rfid;
     private LocalDateTime localDateTime;
 
     public DataEntity() {
     }
 
-    public DataEntity(Long id, int sensor1, int sensor2, int sensor3, int sensor4, String code) {
-        this.sensor1 = sensor1;
+    public DataEntity(int stationNumber, int sensor2, int sensor3, int sensor4, String rfid) {
+        this.stationNumber = stationNumber;
         this.sensor2 = sensor2;
         this.sensor3 = sensor3;
         this.sensor4 = sensor4;
-        this.code = code;
+        this.rfid = rfid;
         localDateTime = LocalDateTime.now();
     }
 
@@ -32,12 +32,12 @@ public class DataEntity {
         this.id = id;
     }
 
-    public int getSensor1() {
-        return sensor1;
+    public int getStationNumber() {
+        return stationNumber;
     }
 
-    public void setSensor1(int sensor1) {
-        this.sensor1 = sensor1;
+    public void setStationNumber(int stationNumber) {
+        this.stationNumber = stationNumber;
     }
 
     public int getSensor2() {
@@ -64,12 +64,12 @@ public class DataEntity {
         this.sensor4 = sensor4;
     }
 
-    public String getCode() {
-        return code;
+    public String getRfid() {
+        return rfid;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setRfid(String rfid) {
+        this.rfid = rfid;
     }
 
     public LocalDateTime getLocalDateTime() {

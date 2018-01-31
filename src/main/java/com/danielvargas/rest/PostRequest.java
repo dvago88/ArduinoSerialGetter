@@ -13,11 +13,14 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import com.danielvargas.entities.DataEntity;
+
 //http://www.oodlestechnologies.com/blogs/Sending-http-request-%7C-Post-String-data-%28-JSON-%29-%7C-with-authentication
 public class PostRequest {
 
+    private int responseCode;
 
-    public void postData(String url, DataEntity dataEntity){
+
+    public void postData(String url, DataEntity dataEntity) {
 
         JSONObject jsonObject = new JSONObject(dataEntity);
         String jsonData = jsonObject.toString();
@@ -25,6 +28,7 @@ public class PostRequest {
         HttpPost httpPost = postRequest.createConnectivity(url);
         postRequest.executeReq(jsonData, httpPost);
     }
+
 
     private HttpPost createConnectivity(String restUrl) {
         HttpPost post = new HttpPost(restUrl);
@@ -57,6 +61,7 @@ public class PostRequest {
         response = client.execute(httpPost);
         System.out.println("Post parameters : " + jsonData);
         System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
+        responseCode = response.getStatusLine().getStatusCode();
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         while ((line = reader.readLine()) != null) {
             result.append(line);
@@ -64,7 +69,10 @@ public class PostRequest {
         System.out.println(result.toString());
     }
 
-/*    public static void main(String[] args) {
+    public int getResponseCode() {
+        return responseCode;
+    }
+    /*    public static void main(String[] args) {
         HttpPostReq httpPostReq=new HttpPostReq();
         httpPostReq.postData("http://localhost:8090/arduino/data/v1",new DataEntity(2, "post is working", LocalDate.of(2018, 1, 1)));
     }*/
