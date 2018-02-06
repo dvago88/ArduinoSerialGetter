@@ -9,6 +9,7 @@ import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 import java.io.BufferedReader;
@@ -31,20 +32,22 @@ public class SerialReader implements SerialPortEventListener {
     private PostRequest postReq = new PostRequest();
     private PutRequest putReq = new PutRequest();
     private String[] data;
-    //    private String url = "https://aqueous-temple-46001.herokuapp.com/";
-    private String url = "http://localhost:8090/";
+    private String url = "https://aqueous-temple-46001.herokuapp.com/";
+//    private String url = "http://localhost:8090/";
 
     private Boolean primera = true;
     private boolean switcher = true;
     /**
      * The port we're normally going to use.
      */
-    private static final String PORT_NAMES[] = {
+   /* private static final String PORT_NAMES[] = {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
+//            TODO: get all ports for the arduinos in the raspberry pi
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
             "COM3", // Windows
-    };
+            "COM4", // Windows
+    };*/
     /**
      * A BufferedReader which will be fed by a InputStreamReader
      * converting the bytes into characters
@@ -64,10 +67,11 @@ public class SerialReader implements SerialPortEventListener {
      */
     private static final int DATA_RATE = 9600;
 
-    public void initialize() {
+    //    TODO: Entregar solo un String al metodo en vez de un vector
+    public void initialize(String portName) {
         // http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
         // La siguiente linea solo se debe poner con la raspberry pi
-//        System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+//        System.setProperty("gnu.io.rxtx.SerialPorts", portName);
 
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -75,12 +79,9 @@ public class SerialReader implements SerialPortEventListener {
         //First, Find an instance of serial port as set in PORT_NAMES.
         while (portEnum.hasMoreElements()) {
             CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-            for (String portName : PORT_NAMES) {
                 if (currPortId.getName().equals(portName)) {
                     portId = currPortId;
-                    break;
                 }
-            }
         }
         if (portId == null) {
             System.out.println("No se encuentra el puerto COM.");
@@ -182,16 +183,22 @@ public class SerialReader implements SerialPortEventListener {
 
     public static void main(String[] args) throws Exception {
         SerialReader main = new SerialReader();
-        main.initialize();
-        Thread t = new Thread() {
-            public void run() {
-                //Esto es para que no se cierre la conexion
-                try {
-                    Thread.sleep(1000000);
-                } catch (InterruptedException ie) {
-                }
+        main.initialize("COM3");
+//        main.initialize("/dev/ttyACM0");
+        Thread secondPort = new Thread(() -> {
+            SerialReader secondary = new SerialReader();
+            secondary.initialize("COM4");
+//            secondary.initialize("/dev/ttyACM1");
+        });
+        secondPort.start();
+        Thread t = new Thread(() -> {
+            //Esto es para que no se cierre la conexion
+            try {
+                Thread.sleep(1000000);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
-        };
+        });
         t.start();
         System.out.println("Iniciado correctamente");
     }
