@@ -1,6 +1,9 @@
 package com.danielvargas.serial;
 
 import com.danielvargas.entities.DataEntity;
+import com.danielvargas.entities.Tiempo;
+import com.danielvargas.rest.get.GetDataEntity;
+import com.danielvargas.rest.get.GetUser;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -9,31 +12,21 @@ import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Enumeration;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 import com.danielvargas.rest.*;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
-
-import java.util.Enumeration;
 
 
 public class SerialReader implements SerialPortEventListener {
     private SerialPort serialPort;
     private SerialFormaterForRestRequest sf = new SerialFormaterForRestRequest();
-    private GetRequest getReq = new GetRequest();
+    private GetDataEntity getDataEntity = new GetDataEntity();
+    private GetUser getUser = new GetUser();
     private PostRequest postReq = new PostRequest();
     private PutRequest putReq = new PutRequest();
     private String[] data;
-    private String url = "https://aqueous-temple-46001.herokuapp.com/";
-//    private String url = "http://localhost:8090/";
+    //    private String url = "https://aqueous-temple-46001.herokuapp.com/";
+    private String url = "http://localhost:8090/";
 
     private Boolean primera = true;
     private boolean switcher = true;
@@ -79,9 +72,9 @@ public class SerialReader implements SerialPortEventListener {
         //First, Find an instance of serial port as set in PORT_NAMES.
         while (portEnum.hasMoreElements()) {
             CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-                if (currPortId.getName().equals(portName)) {
-                    portId = currPortId;
-                }
+            if (currPortId.getName().equals(portName)) {
+                portId = currPortId;
+            }
         }
         if (portId == null) {
             System.out.println("No se encuentra el puerto COM.");
@@ -125,6 +118,7 @@ public class SerialReader implements SerialPortEventListener {
     /**
      * Esto es lo que lee los datos (maneja los eventos)
      */
+//    TODO: Refactorizar (metodo demasido largo y creciendo)
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
@@ -136,14 +130,27 @@ public class SerialReader implements SerialPortEventListener {
 //                    TODO: Anexar una 'a' y 'b' (u otra señal) al codigo arduino para reconocimiento
                     case 'a':
                         code = line.substring(1);
+                       /* long userId = getUser.makeRequest(url + "user/" + code);
+                        if (userId == -1) {
+                            output.write(0);
+                            break;
+                        }*/
                         datos = input.readLine().split("/");
                         dataEntity = new DataEntity(
                                 Integer.parseInt(datos[0]),
-                                Integer.parseInt(datos[1])
-                                , Integer.parseInt(datos[2]),
+                                (int) Math.round(Double.parseDouble(datos[1])),
+                                Integer.parseInt(datos[2]),
                                 Integer.parseInt(datos[3]),
                                 code
                         );
+                        Tiempo tiempo = new Tiempo();
+
+                        postReq.postData(url + "historial/" + datos[0] + "/" + code, tiempo);
+//                        Si el usuario no existe en la base de datos lo rechaza:
+                        if (postReq.getResponseCode() == 401) {
+                            output.write(0);
+                            break;
+                        }
                         postReq.postData(url, dataEntity);
 //                        TODO: refactorizar, evitar crear dataentity incesariamente
                         postReq.postData(url + "stations/" + datos[0], new DataEntity());
@@ -151,13 +158,14 @@ public class SerialReader implements SerialPortEventListener {
 //                            TODO: agregar marca para saber que no llegó al servidor
                         }
 //                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
+                        output.write(1);
                         break;
                     case 'b':
                         code = line.substring(1);
                         datos = input.readLine().split("/");
                         try {
 //                            TODO: Revisar primero que sí se pudo subir al servidor previamente
-                            dataEntity = getReq.call_me(url + datos[0]);
+                            dataEntity = getDataEntity.makeRequest(url + datos[0]);
                             if (dataEntity.getRfid().equals(code)) {
                                 output.write(0);
                                 postReq.postData(url + "stations/" + datos[0], new DataEntity());
@@ -172,8 +180,13 @@ public class SerialReader implements SerialPortEventListener {
                         data = line.split("/");
 //                    TODO: procesar los datos
                         break;
+                    case 'z':
+//                        TODO: Hacer algo cuando los sensores perciban cambios drasticos
+                        System.out.println("Ha habido un cambio en la distancia");
+                        System.out.println("La nueva distancia es: " + line.substring(1));
+                        break;
                     default:
-                        System.out.println("Se recibió esto: " + line);
+                        System.out.println("O.o Se recibió esto: " + line);
                 }
             } catch (Exception e) {
                 System.err.println(e.toString());
@@ -181,6 +194,7 @@ public class SerialReader implements SerialPortEventListener {
         }
     }
 
+    //    TODO: Crear clase Main para esta parte:
     public static void main(String[] args) throws Exception {
         SerialReader main = new SerialReader();
         main.initialize("COM3");
@@ -188,7 +202,7 @@ public class SerialReader implements SerialPortEventListener {
         Thread secondPort = new Thread(() -> {
             SerialReader secondary = new SerialReader();
             secondary.initialize("COM4");
-//            secondary.initialize("/dev/ttyACM1");
+//            secondary.initialize("/dev/ttyUSB0");
         });
         secondPort.start();
         Thread t = new Thread(() -> {

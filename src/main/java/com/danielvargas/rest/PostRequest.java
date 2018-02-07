@@ -20,9 +20,9 @@ public class PostRequest {
     private int responseCode;
 
 
-    public void postData(String url, DataEntity dataEntity) {
+    public void postData(String url, Object object) {
 
-        JSONObject jsonObject = new JSONObject(dataEntity);
+        JSONObject jsonObject = new JSONObject(object);
         String jsonData = jsonObject.toString();
         PostRequest postRequest = new PostRequest();
         HttpPost httpPost = postRequest.createConnectivity(url);

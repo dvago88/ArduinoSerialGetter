@@ -39,6 +39,7 @@ dependencies {
     compile("com.fasterxml.jackson.core:jackson-databind")
     compile 'org.json:json:20171018'
     compile "org.apache.httpcomponents:httpclient:4.3.3"
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3'
 
     compile files('libs/RXTXcomm.jar')
 
