@@ -22,11 +22,11 @@ public class SerialReader implements SerialPortEventListener {
     private SerialFormaterForRestRequest sf = new SerialFormaterForRestRequest();
     private GetDataEntity getDataEntity = new GetDataEntity();
     private GetUser getUser = new GetUser();
-    private PostRequest postReq = new PostRequest();
+    //    private PostRequest postReq = new PostRequest();
     private PutRequest putReq = new PutRequest();
     private String[] data;
-    //    private String url = "https://aqueous-temple-46001.herokuapp.com/";
-    private String url = "http://localhost:8090/";
+    private String url = "https://aqueous-temple-46001.herokuapp.com/";
+//    private String url = "http://localhost:8090/";
 
     private Boolean primera = true;
     private boolean switcher = true;
@@ -120,6 +120,7 @@ public class SerialReader implements SerialPortEventListener {
      */
 //    TODO: Refactorizar (metodo demasido largo y creciendo)
     public synchronized void serialEvent(SerialPortEvent oEvent) {
+        PostRequest postReq = new PostRequest();
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String line = input.readLine();
@@ -150,16 +151,32 @@ public class SerialReader implements SerialPortEventListener {
                         if (postReq.getResponseCode() == 401) {
                             output.write(0);
                             break;
-                        }
-                        postReq.postData(url, dataEntity);
+                        } else if (postReq.getResponseCode() == 201) {
+                            postReq.postData(url, dataEntity);
 //                        TODO: refactorizar, evitar crear dataentity incesariamente
-                        postReq.postData(url + "stations/" + datos[0], new DataEntity());
-                        if (postReq.getResponseCode() != 201) {
+                            postReq.postData(url + "stations/" + datos[0], new DataEntity());
+                            if (postReq.getResponseCode() != 201 && postReq.getResponseCode() != 202) {
 //                            TODO: agregar marca para saber que no llegó al servidor
-                        }
+                            }
 //                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
-                        output.write(1);
-                        break;
+                            output.write(1);
+                            break;
+                        } else {
+                            System.out.println("Mira el codigo que tiró esta damier: ");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println("---------------------------------------");
+                            System.out.println(postReq.getResponseCode());
+                        }
                     case 'b':
                         code = line.substring(1);
                         datos = input.readLine().split("/");
@@ -201,10 +218,16 @@ public class SerialReader implements SerialPortEventListener {
 //        main.initialize("/dev/ttyACM0");
         Thread secondPort = new Thread(() -> {
             SerialReader secondary = new SerialReader();
-            secondary.initialize("COM4");
-//            secondary.initialize("/dev/ttyUSB0");
+//            secondary.initialize("COM4");
+            secondary.initialize("/dev/ttyUSB0");
         });
-        secondPort.start();
+//        secondPort.start();
+        Thread thirdPort = new Thread(() -> {
+            SerialReader third = new SerialReader();
+//            third.initialize("COM5");
+            third.initialize("/dev/ttyACM1");
+        });
+//        thirdPort.start();
         Thread t = new Thread(() -> {
             //Esto es para que no se cierre la conexion
             try {

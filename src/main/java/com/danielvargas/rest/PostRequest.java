@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import com.danielvargas.entities.DataEntity;
 
 //http://www.oodlestechnologies.com/blogs/Sending-http-request-%7C-Post-String-data-%28-JSON-%29-%7C-with-authentication
 public class PostRequest {
@@ -21,12 +20,10 @@ public class PostRequest {
 
 
     public void postData(String url, Object object) {
-
         JSONObject jsonObject = new JSONObject(object);
         String jsonData = jsonObject.toString();
-        PostRequest postRequest = new PostRequest();
-        HttpPost httpPost = postRequest.createConnectivity(url);
-        postRequest.executeReq(jsonData, httpPost);
+        HttpPost httpPost = createConnectivity(url);
+        executeReq(jsonData, httpPost);
     }
 
 
@@ -59,9 +56,9 @@ public class PostRequest {
         httpPost.setEntity(new StringEntity(jsonData));
         HttpClient client = HttpClientBuilder.create().build();
         response = client.execute(httpPost);
-        System.out.println("Post parameters : " + jsonData);
-        System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
         responseCode = response.getStatusLine().getStatusCode();
+        System.out.println("Post parameters : " + jsonData);
+        System.out.println("Response Code : " + getResponseCode());
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         while ((line = reader.readLine()) != null) {
             result.append(line);
@@ -72,8 +69,4 @@ public class PostRequest {
     public int getResponseCode() {
         return responseCode;
     }
-    /*    public static void main(String[] args) {
-        HttpPostReq httpPostReq=new HttpPostReq();
-        httpPostReq.postData("http://localhost:8090/arduino/data/v1",new DataEntity(2, "post is working", LocalDate.of(2018, 1, 1)));
-    }*/
 }
