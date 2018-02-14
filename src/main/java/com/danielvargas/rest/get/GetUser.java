@@ -8,7 +8,7 @@ import java.util.Map;
 public class GetUser extends GetRequestBase {
     public long makeRequest(String url) throws Exception {
         Map<String, String> res = call_me(url);
-        if (res.get("responsCode").equals("401")) {
+        if (res.get("responseCode").equals("401")) {
             return -1;
         }
         String response = res.get("response");

@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class GetRequestBase {
+abstract class GetRequestBase {
 
-    public Map<String, String> call_me(String url) throws Exception {
+    Map<String, String> call_me(String url) throws Exception {
 //        String url = "http://localhost:8090/";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

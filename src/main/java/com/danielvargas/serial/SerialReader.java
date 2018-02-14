@@ -2,6 +2,7 @@ package com.danielvargas.serial;
 
 import com.danielvargas.entities.DataEntity;
 import com.danielvargas.entities.Tiempo;
+import com.danielvargas.rest.get.GetAvailabilityOfStation;
 import com.danielvargas.rest.get.GetDataEntity;
 import com.danielvargas.rest.get.GetUser;
 import gnu.io.CommPortIdentifier;
@@ -13,15 +14,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
+import java.util.Scanner;
 
 import com.danielvargas.rest.*;
 
 
 public class SerialReader implements SerialPortEventListener {
+    //    TODO: crear constructor
     private SerialPort serialPort;
     private SerialFormaterForRestRequest sf = new SerialFormaterForRestRequest();
     private GetDataEntity getDataEntity = new GetDataEntity();
     private GetUser getUser = new GetUser();
+    private GetAvailabilityOfStation isStationAvailable = new GetAvailabilityOfStation();
     //    private PostRequest postReq = new PostRequest();
     private PutRequest putReq = new PutRequest();
     private String[] data;
@@ -30,6 +34,9 @@ public class SerialReader implements SerialPortEventListener {
 
     private Boolean primera = true;
     private boolean switcher = true;
+
+    private Scanner scanner = new Scanner(System.in);
+
     /**
      * The port we're normally going to use.
      */
@@ -131,14 +138,49 @@ public class SerialReader implements SerialPortEventListener {
 //                    TODO: Anexar una 'a' y 'b' (u otra señal) al codigo arduino para reconocimiento
                     case 'a':
                         code = line.substring(1);
-                       /* long userId = getUser.makeRequest(url + "user/" + code);
+                        long userId = getUser.makeRequest(url + "user/" + code);
                         if (userId == -1) {
+                            System.out.println("Usuario no registrado");
                             output.write(0);
                             break;
-                        }*/
+                        }
+//                        Aca en vez de scanner se usa un GUI para que el usuario ponga su elección
+                        int estacionCodigo = scanner.nextInt();
+                        int estacion = convertidor(estacionCodigo);
+                        int res = isStationAvailable.makeRequest(url + "stations/" + estacion);
+                        if (res == -1) {
+                            System.out.println("Estación inexistente");
+                            output.write(0);
+                            break;
+                        } else if (res == 0) {
+                            int toSend = estacionCodigo * 10;
+                            System.out.println("mando esto " + toSend);
+                            output.write(toSend);
+                            try {
+//                            TODO: Revisar primero que sí se pudo subir al servidor previamente
+                                dataEntity = getDataEntity.makeRequest(url + estacion);
+                                if (dataEntity.getRfid().equals(code)) {
+                                    postReq.postData(url + "stations/" + estacion, new DataEntity());
+                                    Tiempo tiempo = new Tiempo();
+//                                  TODO: hacer algo si no se pudo conectar con el servidor para enviar el historial
+//                                    postReq.postData(url + "historial/" + estacion + "/" + code, tiempo);
+                                    output.write(11);
+                                } else {
+                                    output.write(0);
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+
+                        } else {
+                            output.write(estacionCodigo);
+                        }
+                        break;
+                    case 'b':
+                        code = line.substring(1);
                         datos = input.readLine().split("/");
                         dataEntity = new DataEntity(
-                                Integer.parseInt(datos[0]),
+                                convertidor(Integer.parseInt(datos[0])),
                                 (int) Math.round(Double.parseDouble(datos[1])),
                                 Integer.parseInt(datos[2]),
                                 Integer.parseInt(datos[3]),
@@ -146,7 +188,7 @@ public class SerialReader implements SerialPortEventListener {
                         );
                         Tiempo tiempo = new Tiempo();
 
-                        postReq.postData(url + "historial/" + datos[0] + "/" + code, tiempo);
+                        postReq.postData(url + "historial/" + dataEntity.getStationNumber() + "/" + code, tiempo);
 //                        Si el usuario no existe en la base de datos lo rechaza:
                         if (postReq.getResponseCode() == 401) {
                             output.write(0);
@@ -154,43 +196,13 @@ public class SerialReader implements SerialPortEventListener {
                         } else if (postReq.getResponseCode() == 201) {
                             postReq.postData(url, dataEntity);
 //                        TODO: refactorizar, evitar crear dataentity incesariamente
-                            postReq.postData(url + "stations/" + datos[0], new DataEntity());
+                            postReq.postData(url + "stations/" + dataEntity.getStationNumber(), new DataEntity());
                             if (postReq.getResponseCode() != 201 && postReq.getResponseCode() != 202) {
 //                            TODO: agregar marca para saber que no llegó al servidor
                             }
 //                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
                             output.write(1);
                             break;
-                        } else {
-                            System.out.println("Mira el codigo que tiró esta damier: ");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println("---------------------------------------");
-                            System.out.println(postReq.getResponseCode());
-                        }
-                    case 'b':
-                        code = line.substring(1);
-                        datos = input.readLine().split("/");
-                        try {
-//                            TODO: Revisar primero que sí se pudo subir al servidor previamente
-                            dataEntity = getDataEntity.makeRequest(url + datos[0]);
-                            if (dataEntity.getRfid().equals(code)) {
-                                output.write(0);
-                                postReq.postData(url + "stations/" + datos[0], new DataEntity());
-                            } else {
-                                output.write(1);
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
                         }
                         break;
                     case 'd':
@@ -211,10 +223,27 @@ public class SerialReader implements SerialPortEventListener {
         }
     }
 
+    private int convertidor(int n) {
+        switch (n) {
+            case 10:
+                return 1;
+            case 12:
+                return 2;
+            case 13:
+                return 3;
+            case 14:
+                return 4;
+            case 15:
+                return 5;
+            default:
+                return 1;
+        }
+    }
+
     //    TODO: Crear clase Main para esta parte:
     public static void main(String[] args) throws Exception {
         SerialReader main = new SerialReader();
-        main.initialize("COM3");
+        main.initialize("COM7");
 //        main.initialize("/dev/ttyACM0");
         Thread secondPort = new Thread(() -> {
             SerialReader secondary = new SerialReader();
