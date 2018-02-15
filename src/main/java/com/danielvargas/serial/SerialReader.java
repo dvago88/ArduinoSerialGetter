@@ -1,3 +1,4 @@
+/*
 package com.danielvargas.serial;
 
 import com.danielvargas.entities.DataEntity;
@@ -5,16 +6,21 @@ import com.danielvargas.entities.Tiempo;
 import com.danielvargas.rest.get.GetAvailabilityOfStation;
 import com.danielvargas.rest.get.GetDataEntity;
 import com.danielvargas.rest.get.GetUser;
+import com.danielvargas.rfid.Interface;
+import com.danielvargas.rfid.RfidListener;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.danielvargas.rest.*;
 
@@ -22,7 +28,6 @@ import com.danielvargas.rest.*;
 public class SerialReader implements SerialPortEventListener {
     //    TODO: crear constructor
     private SerialPort serialPort;
-    private SerialFormaterForRestRequest sf = new SerialFormaterForRestRequest();
     private GetDataEntity getDataEntity = new GetDataEntity();
     private GetUser getUser = new GetUser();
     private GetAvailabilityOfStation isStationAvailable = new GetAvailabilityOfStation();
@@ -37,41 +42,53 @@ public class SerialReader implements SerialPortEventListener {
 
     private Scanner scanner = new Scanner(System.in);
 
-    /**
+    */
+/**
      * The port we're normally going to use.
-     */
-   /* private static final String PORT_NAMES[] = {
+     *//*
+
+   */
+/* private static final String PORT_NAMES[] = {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
 //            TODO: get all ports for the arduinos in the raspberry pi
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
             "COM3", // Windows
             "COM4", // Windows
-    };*/
-    /**
+    };*//*
+
+    */
+/**
      * A BufferedReader which will be fed by a InputStreamReader
      * converting the bytes into characters
      * making the displayed results codepage independent
-     */
+     *//*
+
     private BufferedReader input;
-    /**
+    */
+/**
      * The output stream to the port
-     */
+     *//*
+
     private OutputStream output;
-    /**
+    */
+/**
      * Milliseconds to block while waiting for port open
-     */
+     *//*
+
     private static final int TIME_OUT = 2000;
-    /**
+    */
+/**
      * Default bits per second for COM port.
-     */
+     *//*
+
     private static final int DATA_RATE = 9600;
 
     //    TODO: Entregar solo un String al metodo en vez de un vector
     public void initialize(String portName) {
         // http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
         // La siguiente linea solo se debe poner con la raspberry pi
-//        System.setProperty("gnu.io.rxtx.SerialPorts", portName);
+        System.setProperty("gnu.io.rxtx.SerialPorts", portName);
 
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -111,10 +128,12 @@ public class SerialReader implements SerialPortEventListener {
         }
     }
 
-    /**
+    */
+/**
      * Se llama cuando se deje usar el puerto
      * Esto evita que se bloqueen los puertos.
-     */
+     *//*
+
     public synchronized void close() {
         if (serialPort != null) {
             serialPort.removeEventListener();
@@ -122,9 +141,11 @@ public class SerialReader implements SerialPortEventListener {
         }
     }
 
-    /**
+    */
+/**
      * Esto es lo que lee los datos (maneja los eventos)
-     */
+     *//*
+
 //    TODO: Refactorizar (metodo demasido largo y creciendo)
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         PostRequest postReq = new PostRequest();
@@ -243,8 +264,24 @@ public class SerialReader implements SerialPortEventListener {
     //    TODO: Crear clase Main para esta parte:
     public static void main(String[] args) throws Exception {
         SerialReader main = new SerialReader();
-        main.initialize("COM7");
-//        main.initialize("/dev/ttyACM0");
+//        main.initialize("COM7");
+        main.initialize("/dev/ttyACM0");
+
+        Thread rfid = new Thread(() -> {
+            Interface.init("/home/pi/MFRC522-python/Read.py", "/home/pi/MFRC522-python/Write.py");
+
+            System.out.println("Reader test:");
+            try {
+                RfidListener reader = new RfidListener();
+                reader.read();
+
+                System.out.println("Id: " + reader.getId());
+                System.out.println("Content: " + reader.getContent());
+            } catch (IOException ioe) {
+                ioe.getStackTrace();
+            }
+        });
+        rfid.start();
         Thread secondPort = new Thread(() -> {
             SerialReader secondary = new SerialReader();
 //            secondary.initialize("COM4");
@@ -269,3 +306,4 @@ public class SerialReader implements SerialPortEventListener {
         System.out.println("Iniciado correctamente");
     }
 }
+*/
