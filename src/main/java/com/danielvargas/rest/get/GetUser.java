@@ -12,7 +12,7 @@ public class GetUser extends GetRequestBase {
             return -1;
         }
         String response = res.get("response");
-//        TODO: procesar response
+//        TODO: procesar el response
         return 0;
     }
 }

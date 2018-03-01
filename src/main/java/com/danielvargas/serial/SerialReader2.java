@@ -46,31 +46,42 @@ public class SerialReader2 implements SerialPortEventListener {
     /**
      * The port we're normally going to use.
      */
-   /* private static final String PORT_NAMES[] = {
+
+
+    private static final String PORT_NAMES[] = {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
 //            TODO: get all ports for the arduinos in the raspberry pi
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
             "COM3", // Windows
             "COM4", // Windows
-    };*/
+    };
+
     /**
      * A BufferedReader which will be fed by a InputStreamReader
      * converting the bytes into characters
      * making the displayed results codepage independent
      */
+
+
     private BufferedReader input;
     /**
      * The output stream to the port
      */
+
+
     private OutputStream output;
     /**
      * Milliseconds to block while waiting for port open
      */
+
+
     private static final int TIME_OUT = 2000;
     /**
      * Default bits per second for COM port.
      */
+
+
     private static final int DATA_RATE = 9600;
 
     //    TODO: Entregar solo un String al metodo en vez de un vector
@@ -121,6 +132,8 @@ public class SerialReader2 implements SerialPortEventListener {
      * Se llama cuando se deje usar el puerto
      * Esto evita que se bloqueen los puertos.
      */
+
+
     public synchronized void close() {
         if (serialPort != null) {
             serialPort.removeEventListener();
@@ -131,6 +144,8 @@ public class SerialReader2 implements SerialPortEventListener {
     /**
      * Esto es lo que lee los datos (maneja los eventos)
      */
+
+
 //    TODO: Refactorizar (metodo demasido largo y creciendo)
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         PostRequest postReq = new PostRequest();
@@ -197,6 +212,7 @@ public class SerialReader2 implements SerialPortEventListener {
         try {
             long userId = getUser.makeRequest(url + "user/" + rfid);
             if (userId == -1) {
+                System.out.println("ACCESO DENEGADO!!!");
                 System.out.println("Usuario no registrado");
             } else {
                 int estacionCodigo = scanner.nextInt();
@@ -212,7 +228,7 @@ public class SerialReader2 implements SerialPortEventListener {
                     try {
 //                            TODO: Revisar primero que sí se pudo subir al servidor previamente
                         dataEntity = getDataEntity.makeRequest(url + estacion);
-                        if (dataEntity.getRfid().equals(rfid)) {
+                        if (dataEntity.getRfid().equals(rfid + "")) {
                             postReq.postData(url + "stations/" + estacion, new DataEntity());
                             Tiempo tiempo = new Tiempo();
 //                                  TODO: hacer algo si no se pudo conectar con el servidor para enviar el historial

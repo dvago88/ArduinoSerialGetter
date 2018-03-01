@@ -1,11 +1,9 @@
 package com.danielvargas;
 
-import com.danielvargas.rfid.Interface;
+//import com.danielvargas.rfid.PiApplication;
 import com.danielvargas.rfid.PiApplication;
-import com.danielvargas.rfid.RfidListener;
+//import com.danielvargas.serial.SerialReader2;
 import com.danielvargas.serial.SerialReader2;
-
-import java.io.IOException;
 
 public class Application {
 
@@ -15,7 +13,7 @@ public class Application {
         main.initialize("/dev/ttyACM0");
 
         Thread rfid = new Thread(() -> {
-            PiApplication piApplication = new PiApplication();
+            PiApplication piApplication = new PiApplication(main);
             while (true) {
                 piApplication.startReading();
             }

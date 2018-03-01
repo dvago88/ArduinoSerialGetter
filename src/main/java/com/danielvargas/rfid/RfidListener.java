@@ -31,7 +31,7 @@ public class RfidListener {
      * If the Interface read file was not found or is not python.
      */
     public synchronized void read() throws IOException {
-        log.info("Reading...");
+        log.info("Leyendo...");
         while (tryAgain) {
             Interface.clear();
             tryAgain = false;
