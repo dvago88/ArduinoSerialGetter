@@ -10,11 +10,13 @@ import java.util.Map;
 
 abstract class GetRequestBase {
 
-    Map<String, String> call_me(String url) throws Exception {
+    Map<String, String> call_me(String url, String token) throws Exception {
 //        String url = "http://localhost:8090/";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
+        con.setRequestProperty("Authentication", token);
+        con.setRequestProperty("Authorization", "raspberry");
 //        con.setRequestProperty("User-Agent","Mozilla5.0");
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL: " + url);
@@ -22,7 +24,7 @@ abstract class GetRequestBase {
         BufferedReader in = null;
         try {
             in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        }catch (IOException ex){
+        } catch (IOException ex) {
             System.out.println("Si era esta malparida excepcion");
         }
         String inputLine;
@@ -33,7 +35,7 @@ abstract class GetRequestBase {
                 response.append(inputLine);
             }
             in.close();
-        }catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println("puto null de mierda");
         }
 
@@ -41,7 +43,7 @@ abstract class GetRequestBase {
         System.out.println(stringRespose);
         Map<String, String> res = new HashMap<>();
         res.put("response", stringRespose);
-        res.put("responseCode", responseCode+"");
+        res.put("responseCode", responseCode + "");
         return res;
     }
 }

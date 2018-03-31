@@ -8,8 +8,8 @@ import java.util.Map;
 public class GetDataEntity extends GetRequestBase {
 
 
-    public DataEntity makeRequest(String url) throws Exception {
-        Map<String, String> res = call_me(url);
+    public DataEntity makeRequest(String url, String token) throws Exception {
+        Map<String, String> res = call_me(url, token);
         if (res.get("responseCode").equals("401")) {
             return null;
         }

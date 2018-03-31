@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class GetAvailabilityOfStation extends GetRequestBase {
 
-    public int makeRequest(String url) throws Exception {
-        Map<String, String> res = call_me(url);
+    public int makeRequest(String url, String token) throws Exception {
+        Map<String, String> res = call_me(url, token);
         if (!res.get("responseCode").equals("200")) {
             return -1;
         }

@@ -5,13 +5,14 @@ import com.danielvargas.entities.Tiempo;
 import com.danielvargas.rest.get.GetAvailabilityOfStation;
 import com.danielvargas.rest.get.GetDataEntity;
 import com.danielvargas.rest.get.GetUser;
+import com.danielvargas.rest.post.Login;
+import com.danielvargas.rest.post.PostRequest;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
@@ -169,16 +170,17 @@ public class SerialReader2 implements SerialPortEventListener {
                                 code
                         );
                         Tiempo tiempo = new Tiempo();
-
-                        postReq.postData(url + "historial/" + dataEntity.getStationNumber() + "/" + code, tiempo);
+                        Login login = new Login();
+                        String token = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
+                        postReq.postData(url + "historial/" + dataEntity.getStationNumber() + "/" + code, tiempo, token);
 //                        Si el usuario no existe en la base de datos lo rechaza:
                         if (postReq.getResponseCode() == 401) {
                             output.write(0);
                             break;
                         } else if (postReq.getResponseCode() == 201) {
-                            postReq.postData(url, dataEntity);
+                            postReq.postData(url, dataEntity, token);
 //                        TODO: refactorizar, evitar crear dataentity incesariamente
-                            postReq.postData(url + "stations/" + dataEntity.getStationNumber(), new DataEntity());
+                            postReq.postData(url + "stations/" + dataEntity.getStationNumber(), new DataEntity(), token);
                             if (postReq.getResponseCode() != 201 && postReq.getResponseCode() != 202) {
 //                            TODO: agregar marca para saber que no llegó al servidor
                             }
@@ -208,16 +210,18 @@ public class SerialReader2 implements SerialPortEventListener {
     public void usarEstacion(long rfid, String content) {
         DataEntity dataEntity;
         PostRequest postReq = new PostRequest();
+        Login login = new Login();
         this.rfid = rfid;
         try {
-            long userId = getUser.makeRequest(url + "user/" + rfid);
+            String token = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
+            long userId = getUser.makeRequest(url + "user/" + rfid, token);
             if (userId == -1) {
                 System.out.println("ACCESO DENEGADO!!!");
                 System.out.println("Usuario no registrado");
             } else {
                 int estacionCodigo = scanner.nextInt();
                 int estacion = convertidor(estacionCodigo);
-                int res = isStationAvailable.makeRequest(url + "stations/" + estacion);
+                int res = isStationAvailable.makeRequest(url + "stations/" + estacion, token);
 
                 if (res == -1) {
                     System.out.println("Estación inexistente");
@@ -227,9 +231,9 @@ public class SerialReader2 implements SerialPortEventListener {
                     output.write(toSend);
                     try {
 //                            TODO: Revisar primero que sí se pudo subir al servidor previamente
-                        dataEntity = getDataEntity.makeRequest(url + estacion);
+                        dataEntity = getDataEntity.makeRequest(url + estacion, token);
                         if (dataEntity.getRfid().equals(rfid + "")) {
-                            postReq.postData(url + "stations/" + estacion, new DataEntity());
+                            postReq.postData(url + "stations/" + estacion, new DataEntity(), token);
                             Tiempo tiempo = new Tiempo();
 //                                  TODO: hacer algo si no se pudo conectar con el servidor para enviar el historial
 //                                    postReq.postData(url + "historial/" + estacion + "/" + code, tiempo);
@@ -245,7 +249,6 @@ public class SerialReader2 implements SerialPortEventListener {
                     output.write(estacionCodigo);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
