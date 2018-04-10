@@ -15,7 +15,7 @@ abstract class GetRequestBase {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
-        con.setRequestProperty("Authentication", token);
+        con.setRequestProperty("Authentication", "Bearer " + token);
         con.setRequestProperty("Authorization", "raspberry");
 //        con.setRequestProperty("User-Agent","Mozilla5.0");
         int responseCode = con.getResponseCode();

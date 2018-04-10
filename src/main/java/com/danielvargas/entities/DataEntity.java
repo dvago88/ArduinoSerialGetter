@@ -1,16 +1,20 @@
 package com.danielvargas.entities;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class DataEntity {
 
     private Long id;
+
+    private String rfid;
     private int stationNumber;
+    private String userId;
     private int sensor2;
     private int sensor3;
     private int sensor4;
-    private String rfid;
-    private LocalDateTime localDateTime;
+
+    private Long timeInSeconds;
 
     public DataEntity() {
     }
@@ -21,7 +25,7 @@ public class DataEntity {
         this.sensor3 = sensor3;
         this.sensor4 = sensor4;
         this.rfid = rfid;
-        localDateTime = LocalDateTime.now();
+        timeInSeconds = Timestamp.valueOf(LocalDateTime.now()).getTime();
     }
 
     public Long getId() {
@@ -72,11 +76,19 @@ public class DataEntity {
         this.rfid = rfid;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public Long getTimeInSeconds() {
+        return timeInSeconds;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setTimeInSeconds(Long timeInSeconds) {
+        this.timeInSeconds = timeInSeconds;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

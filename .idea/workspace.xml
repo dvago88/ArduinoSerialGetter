@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="152304ef-49c6-47ae-a26e-00983a1e2c80" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/Login.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequestBase.java" />
+    <list default="true" id="152304ef-49c6-47ae-a26e-00983a1e2c80" name="Default" comment="-la raspberry se autentica (testeado en windows)&#10;- Pequeña refactorizada al">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/Application2.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplicationMocker.java" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_3.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/ArudinoSerialGetter_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/ArudinoSerialGetter_main.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/Application.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/Application.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/PostRequest.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/PutRequest.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/PutRequest.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetAvailabilityOfStation.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetAvailabilityOfStation.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetDataEntity.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetDataEntity.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetRequestBase.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetRequestBase.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetUser.class" afterPath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rest/get/GetUser.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/rfid/toDelete.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/danielvargas/serial/SerialReader3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/PostRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetAvailabilityOfStation.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetAvailabilityOfStation.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetDataEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetDataEntity.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetUser.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetUser.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java" afterPath="$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -49,14 +60,96 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="SerialReader2.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3000">
-              <caret line="57" column="30" lean-forward="false" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+            <state relative-caret-position="240">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PiApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="768">
+              <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PiApplicationMocker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplicationMocker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SerialReader2.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3311">
+              <caret line="273" column="84" lean-forward="false" selection-start-line="273" selection-start-column="84" selection-end-line="273" selection-end-column="84" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1595#1596#0" expanded="true" />
+                <element signature="e#1631#1632#0" expanded="true" />
+                <element signature="e#1687#1688#0" expanded="true" />
+                <element signature="e#1737#1738#0" expanded="true" />
+                <element signature="e#1770#1771#0" expanded="true" />
+                <element signature="e#1799#1800#0" expanded="true" />
+                <element signature="e#1843#1844#0" expanded="true" />
+                <element signature="e#1879#1880#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tiempo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#238#239#0" expanded="true" />
+                <element signature="e#289#290#0" expanded="true" />
+                <element signature="e#336#337#0" expanded="true" />
+                <element signature="e#372#373#0" expanded="true" />
+                <element signature="e#437#438#0" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetRequestBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="17" column="60" lean-forward="false" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,47 +157,8 @@
       <file leaf-file-name="PostRequest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PostRequestBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequestBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2695#2696#0" expanded="true" />
-                <element signature="e#2730#2731#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/Login.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-              <folding>
-                <element signature="e#470#471#0" expanded="true" />
-                <element signature="e#518#519#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="32" column="28" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="408">
+              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -520,13 +574,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/SerialReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/ArduinoSerialGetter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/PutRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/GetRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Historial.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/tiempo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/getStation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetStation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/RfidWriter.java" />
@@ -536,17 +588,21 @@
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/RfidListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/toDelete.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader3.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/PostRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetDataEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetAvailabilityOfStation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequestBase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/Login.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/Application2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplicationMocker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java" />
       </list>
     </option>
   </component>
@@ -557,8 +613,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="73" />
-    <option name="width" value="935" />
+    <option name="x" value="992" />
+    <option name="width" value="936" />
     <option name="height" value="1088" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -577,20 +633,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
               <item name="ArudinoSerialGetter" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ArudinoSerialGetter" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
@@ -644,26 +695,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="danielvargas" type="462c0819:PsiDirectoryNode" />
               <item name="rest" type="462c0819:PsiDirectoryNode" />
-              <item name="get" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ArudinoSerialGetter" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="danielvargas" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
               <item name="post" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ArudinoSerialGetter" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="danielvargas" type="462c0819:PsiDirectoryNode" />
-              <item name="rfid" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ArudinoSerialGetter" type="b2602c69:ProjectViewProjectNode" />
@@ -678,7 +710,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -689,7 +721,7 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/rxtxSerial.dll" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RecentsManager">
@@ -908,7 +940,13 @@
       <workItem from="1521786549411" duration="748000" />
       <workItem from="1521791470673" duration="3734000" />
       <workItem from="1522143101434" duration="266000" />
-      <workItem from="1522488166783" duration="155000" />
+      <workItem from="1522488166783" duration="290000" />
+      <workItem from="1523264439065" duration="5824000" />
+      <workItem from="1523308342213" duration="1905000" />
+      <workItem from="1523327960080" duration="1865000" />
+      <workItem from="1523340860652" duration="106000" />
+      <workItem from="1523345635773" duration="597000" />
+      <workItem from="1523349595754" duration="6169000" />
     </task>
     <task id="LOCAL-00001" summary="-Agregado Post para actualizar estado de la estación&#10;-Cambio a los nombres del dataEntity&#10;-Revisado la enviada y recibida de datos desde y hacia el servidor">
       <created>1517390841915</created>
@@ -959,29 +997,37 @@
       <option name="project" value="LOCAL" />
       <updated>1519897898350</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="-la raspberry se autentica (aunque no se ha podido testear)">
+      <created>1522488367016</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1522488367016</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135160000" />
+    <option name="totallyTimeSpent" value="151761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="72" y="-9" width="1857" height="1098" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4978355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19934994" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502708" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26951152" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22290848" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25541127" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295901" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -989,14 +1035,13 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3582251" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3582251" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24985963" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6017316" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1041,7 +1086,8 @@
     <MESSAGE value="-1 rfid en arduino mega, varias bicicletas" />
     <MESSAGE value="-rfid en la raspberry pi&#10;-Creacion clases que &quot;manejan rfid&quot;&#10;-cambion clase SerialReader pues ya no recibe datos de rfid del arduino" />
     <MESSAGE value="-RIFD conectada a la raspberry funciona para desbloquear y bloquear estaciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="-RIFD conectada a la raspberry funciona para desbloquear y bloquear estaciones" />
+    <MESSAGE value="-la raspberry se autentica (aunque no se ha podido testear)" />
+    <option name="LAST_COMMIT_MESSAGE" value="-la raspberry se autentica (aunque no se ha podido testear)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1050,20 +1096,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/PutRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/DeleteRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
@@ -1224,13 +1256,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/Process.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/RfidWriter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1296,45 +1321,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader3.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/toDelete.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2200">
-          <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="36" column="26" lean-forward="false" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="32" column="28" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetDataEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="11" column="52" lean-forward="false" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#274#320#1" expanded="false" />
+            <element signature="e#329#408#0" expanded="false" />
+            <element signature="e#333#356#0" expanded="false" />
+            <element signature="e#333#356#0" expanded="false" />
+            <element signature="e#333#370#0" expanded="false" />
+            <element signature="e#333#370#0" expanded="false" />
+            <element signature="e#329#408#0" expanded="false" />
+            <element signature="e#417#455#1" expanded="false" />
+            <element signature="e#435#454#0" expanded="false" />
+            <element signature="e#435#454#0" expanded="false" />
+            <element signature="e#711#752#1" expanded="false" />
+            <element signature="e#761#810#1" expanded="false" />
+            <element signature="e#820#862#0" expanded="false" />
+            <element signature="e#820#862#0" expanded="false" />
+            <element signature="e#872#920#0" expanded="false" />
+            <element signature="e#872#920#0" expanded="false" />
+            <element signature="e#930#993#0" expanded="false" />
+            <element signature="e#930#993#0" expanded="false" />
+            <element signature="e#1003#1054#0" expanded="false" />
+            <element signature="e#1003#1054#0" expanded="false" />
+            <element signature="e#1064#1115#0" expanded="false" />
+            <element signature="e#1064#1115#0" expanded="false" />
+            <element signature="e#1125#1176#0" expanded="false" />
+            <element signature="e#1125#1176#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1352,83 +1369,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="58" lean-forward="false" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#401#424#1" expanded="false" />
-            <element signature="e#433#498#1" expanded="false" />
-            <element signature="e#457#497#0" expanded="false" />
-            <element signature="e#507#534#0" expanded="false" />
-            <element signature="e#507#534#0" expanded="false" />
-            <element signature="e#724#765#1" expanded="false" />
-            <element signature="e#743#764#0" expanded="false" />
-            <element signature="e#793#833#0" expanded="false" />
-            <element signature="e#793#833#0" expanded="false" />
-            <element signature="e#863#895#0" expanded="false" />
-            <element signature="e#863#895#0" expanded="false" />
-            <element signature="e#906#931#1" expanded="false" />
-            <element signature="e#1004#1024#0" expanded="false" />
-            <element signature="e#1038#1139#0" expanded="false" />
-            <element signature="e#1038#1139#0" expanded="false" />
-            <element signature="e#1174#1217#1" expanded="false" />
-            <element signature="e#1245#1348#0" expanded="false" />
-            <element signature="e#1245#1348#0" expanded="false" />
-            <element signature="e#1383#1481#0" expanded="false" />
-            <element signature="e#1383#1481#0" expanded="false" />
-            <element signature="e#1491#1534#1" expanded="false" />
-            <element signature="e#1586#1628#1" expanded="false" />
-            <element signature="e#1637#1671#0" expanded="false" />
-            <element signature="e#1637#1671#0" expanded="false" />
-            <element signature="e#1637#1671#0" expanded="false" />
-            <element signature="e#1681#1723#0" expanded="false" />
-            <element signature="e#1681#1723#0" expanded="false" />
-            <element signature="e#1705#1722#0" expanded="false" />
-            <element signature="e#1705#1722#0" expanded="false" />
-            <element signature="e#1681#1723#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2695#2696#0" expanded="true" />
-            <element signature="e#2730#2731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/Login.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#470#471#0" expanded="false" />
+            <element signature="e#518#519#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/Application2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-576">
+          <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/get/GetRequestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="17" column="60" lean-forward="false" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplicationMocker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rfid/PiApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/Tiempo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#238#239#0" expanded="true" />
+            <element signature="e#289#290#0" expanded="true" />
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#372#373#0" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="408">
+          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/rest/post/PostRequestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-385">
+          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2695#2696#0" expanded="false" />
+            <element signature="e#2730#2731#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/entities/DataEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1595#1596#0" expanded="true" />
+            <element signature="e#1631#1632#0" expanded="true" />
+            <element signature="e#1687#1688#0" expanded="true" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <element signature="e#1770#1771#0" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+            <element signature="e#1843#1844#0" expanded="true" />
+            <element signature="e#1879#1880#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/danielvargas/serial/SerialReader2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3000">
-          <caret line="57" column="30" lean-forward="false" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+        <state relative-caret-position="3311">
+          <caret line="273" column="84" lean-forward="false" selection-start-line="273" selection-start-column="84" selection-end-line="273" selection-end-column="84" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1492,7 +1554,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.32628676" />
+                <option value="0.36672795" />
               </list>
             </option>
           </splitter-proportions>

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  * Test class
- *
+ * All credit to:
  * @author Sacredgamer (https://github.com/Sacredgamer/RFID-RC552-Interface)
  */
 
@@ -18,10 +18,10 @@ import java.util.logging.Logger;
 public class PiApplication {
 
     private static final Logger log = Logger.getLogger(PiApplication.class.getName());
-    private SerialReader2 serialReader2;
+    private SerialReader2 serialReader;
 
     public PiApplication(SerialReader2 serialReader01) {
-        serialReader2 = serialReader01;
+        serialReader = serialReader01;
         Interface.init("/home/pi/MFRC522-python/Read.py", "/home/pi/MFRC522-python/Write.py");
     }
 
@@ -34,7 +34,7 @@ public class PiApplication {
             reader.read();
             long rfid = reader.getId();
             String content = reader.getContent();
-            serialReader2.usarEstacion(rfid, content);
+            serialReader.usarEstacion(rfid, content);
             log.info("Id: " + rfid);
             log.info("Contenido: " + content);
         } catch (IOException ioe) {

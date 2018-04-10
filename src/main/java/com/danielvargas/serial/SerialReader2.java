@@ -38,8 +38,8 @@ public class SerialReader2 implements SerialPortEventListener {
         getDataEntity = new GetDataEntity();
         getUser = new GetUser();
         isStationAvailable = new GetAvailabilityOfStation();
-        url = "https://aqueous-temple-46001.herokuapp.com/";
-//        url = "http://localhost:8090/";
+//        url = "https://aqueous-temple-46001.herokuapp.com/";
+        url = "http://localhost:8090/";
         putReq = new PutRequest();
         scanner = new Scanner(System.in);
     }
@@ -89,7 +89,7 @@ public class SerialReader2 implements SerialPortEventListener {
     public void initialize(String portName) {
         // http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
         // La siguiente linea solo se debe poner con la raspberry pi
-        System.setProperty("gnu.io.rxtx.SerialPorts", portName);
+//        System.setProperty("gnu.io.rxtx.SerialPorts", portName);
 
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -149,12 +149,10 @@ public class SerialReader2 implements SerialPortEventListener {
 
 //    TODO: Refactorizar (metodo demasido largo y creciendo)
     public synchronized void serialEvent(SerialPortEvent oEvent) {
-        PostRequest postReq = new PostRequest();
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String line = input.readLine();
                 String code;
-                DataEntity dataEntity;
                 String[] datos;
                 switch (line.charAt(0)) {
                     case 'a':
@@ -162,36 +160,16 @@ public class SerialReader2 implements SerialPortEventListener {
                     case 'b':
                         code = rfid + "";
                         datos = input.readLine().split("/");
-                        dataEntity = new DataEntity(
-                                convertidor(Integer.parseInt(datos[0])),
-                                (int) Math.round(Double.parseDouble(datos[1])),
-                                Integer.parseInt(datos[2]),
-                                Integer.parseInt(datos[3]),
-                                code
-                        );
-                        Tiempo tiempo = new Tiempo();
-                        Login login = new Login();
-                        String token = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
-                        postReq.postData(url + "historial/" + dataEntity.getStationNumber() + "/" + code, tiempo, token);
+                        int responseCode = processArduinoDataAndSendItToApi(code, datos);
+
 //                        Si el usuario no existe en la base de datos lo rechaza:
-                        if (postReq.getResponseCode() == 401) {
+                        if (responseCode == 401) {
                             output.write(0);
-                            break;
-                        } else if (postReq.getResponseCode() == 201) {
-                            postReq.postData(url, dataEntity, token);
-//                        TODO: refactorizar, evitar crear dataentity incesariamente
-                            postReq.postData(url + "stations/" + dataEntity.getStationNumber(), new DataEntity(), token);
-                            if (postReq.getResponseCode() != 201 && postReq.getResponseCode() != 202) {
-//                            TODO: agregar marca para saber que no llegó al servidor
-                            }
-//                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
-                            output.write(1);
                             break;
                         }
                         break;
                     case 'd':
                         data = line.split("/");
-//                    TODO: procesar los datos
                         break;
                     case 'z':
 //                        TODO: Hacer algo cuando los sensores perciban cambios drasticos
@@ -213,8 +191,9 @@ public class SerialReader2 implements SerialPortEventListener {
         Login login = new Login();
         this.rfid = rfid;
         try {
-            String token = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
-            long userId = getUser.makeRequest(url + "user/" + rfid, token);
+            String response = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
+            String token = response.split("\"")[3];
+            long userId = getUser.makeRequest(url + "user/code/" + rfid, token);
             if (userId == -1) {
                 System.out.println("ACCESO DENEGADO!!!");
                 System.out.println("Usuario no registrado");
@@ -253,6 +232,9 @@ public class SerialReader2 implements SerialPortEventListener {
             e.printStackTrace();
         }
     }
+    /*-------------------------------*/
+    /*Helper methods*/
+    /*-------------------------------*/
 
 
     private int convertidor(int n) {
@@ -270,5 +252,34 @@ public class SerialReader2 implements SerialPortEventListener {
             default:
                 return 1;
         }
+    }
+
+    private int processArduinoDataAndSendItToApi(String rfidCode, String[] data) throws Exception {
+        PostRequest postReq = new PostRequest();
+        DataEntity dataEntity = new DataEntity(
+                convertidor(Integer.parseInt(data[0])),
+                (int) Math.round(Double.parseDouble(data[1])),
+                Integer.parseInt(data[2]),
+                Integer.parseInt(data[3]),
+                rfidCode
+        );
+        Login login = new Login();
+        String response = login.postData(url + "perform_login", "username=raspberry&password=raspberry");
+        String token = response.split("\"")[3];
+        postReq.postData(url + "historial/" + dataEntity.getStationNumber() + "/" + rfidCode, dataEntity, token);
+        int responseCode = postReq.getResponseCode();
+
+        if (responseCode == 201) {
+            postReq.postData(url, dataEntity, token);
+//            TODO: hacer un loop que intente enviar estos datos varias veces antes de rendirse...
+            postReq.postData(url + "stations/" + dataEntity.getStationNumber(), "", token);
+            if (postReq.getResponseCode() != 201 && postReq.getResponseCode() != 202) {
+                System.out.println("No llegaron los datos al servidor");
+//                            TODO: agregar marca para saber que no llegó al servidor
+            }
+//                        TODO: Almacenar codigo "codificado" en un txt en la raspberry pi
+            output.write(1);
+        }
+        return responseCode;
     }
 }

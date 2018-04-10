@@ -13,7 +13,7 @@ public class PostRequest extends PostRequestBase {
         post.setHeader("Content-Type", contentType);
         post.setHeader("Accept", "application/json");
         post.setHeader("X-Stream", "true");
-        post.setHeader("Authentication", token);
+        post.setHeader("Authentication", "Bearer " + token);
         post.setHeader("Authorization", "raspberry");
         return post;
     }
